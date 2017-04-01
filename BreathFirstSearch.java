@@ -7,6 +7,9 @@ public class BreathFirstSearch {
     |  _ _//  |   |
     v v   v   v   v
     10-->30->60->70
+
+    BFS-> Iterative -> 40 10 20 30 60 50 70
+    BFS-> Recursive -> 40 10 20 30 60 50 70
     */
 
     public static void main(String[] args) {
@@ -46,6 +49,11 @@ public class BreathFirstSearch {
         }
         System.out.println("bfs using queue");
         bfsUsingQueue(n1, adjacentNodes, nodes);
+        clearFlags(nodes);
+
+        System.out.println("recursive bfs");
+        Queue q = new Queue();
+        recursiveBFS(q, adjacentNodes, nodes, n1);
 
     }
 
@@ -95,4 +103,28 @@ public class BreathFirstSearch {
             }
         }
     }
+
+    //Recursive bfs
+    public static void recursiveBFS(Queue queue, int[][] m, ArrayList<Node> nodes, Node n) {
+        if (queue.isEmpty() && !n.visited) {
+            queue.enQueue(n);
+        }
+        if (!queue.isEmpty()) {
+            Node element = queue.deQueue();
+            System.out.println(element.data);
+            ArrayList<Node> neighbours = findNeighbours(m, element, nodes);
+            for (int i = 0; i < neighbours.size(); i++) {
+                Node n1 = neighbours.get(i);
+                if (n1 != null && !n1.visited) {
+                    queue.enQueue(n1);
+                    n1.visited = true;
+                    recursiveBFS(queue, m, nodes, n1);
+                }
+            }
+        }
+
+
+    }
+
+
 }

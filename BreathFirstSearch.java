@@ -85,7 +85,7 @@ public class BreathFirstSearch {
         }
     }
 
-    //Iterative bfs using stack
+    //Iterative bfs 
     public static void bfsUsingQueue(Node n, int[][] m, ArrayList<Node> nodes) {
         Queue q = new Queue();
         q.enQueue(n);
